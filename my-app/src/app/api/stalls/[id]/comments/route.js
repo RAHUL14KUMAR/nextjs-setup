@@ -6,12 +6,12 @@ export const POST=async(request,{params})=>{
     try{
         await connect()
         const {id}=params;
-        const {userId,...otherdetails}=await request.json();
+        const {userId,comment}=await request.json();
         console.log(userId);
     
         const stall=await Stall.findById(id);
         if(stall){
-            stall.comments.push({...otherdetails,userId})
+            stall.comments.push({comment:comment,author:userId})
             const stallBoost=await stall.save();
             if(stallBoost){
                 const stally=await Stall.findById(id).populate('comments.author');

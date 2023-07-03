@@ -13,8 +13,6 @@ export const GET=async (request) =>{
         return new NextResponse(error,{status:500})
     }
 }
-
-
 export const POST=async(request)=>{
     try{
         await connect();
